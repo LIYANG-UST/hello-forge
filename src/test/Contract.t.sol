@@ -5,19 +5,42 @@ import "ds-test/test.sol";
 
 import "../Contract.sol";
 
+interface Vm {
+    function prank(address) external;
+}
+
+contract Foo {
+    function bar() external {
+        require(msg.sender == address(1), "wrong caller");
+    }
+}
+
 contract ContractTest is DSTest {
+    Vm vm = Vm(0x7109709ECfa91a80626fF3989D68f67F5b1DD12D);
+
     Contract myContract;
+    Foo foo;
 
     function setUp() public {
         myContract = new Contract();
+        foo = new Foo();
     }
 
     function testExample() public {
         assertTrue(true);
     }
 
-    function testAddOne(uint256 x) public {
+    function testAdd() public {
         emit log_string("hello");
+        assertEq(2 + 1, myContract.addOne(2));
+    }
+
+    function testAddOne(uint256 x) public {
         assertEq(x + 1, myContract.addOne(x));
+    }
+
+    function testBar() public {
+        vm.prank(address(1));
+        foo.bar();
     }
 }
