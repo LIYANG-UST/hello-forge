@@ -4,22 +4,26 @@ pragma solidity ^0.8.10;
 
 import "ds-test/test.sol";
 
+import "forge-std/stdLib.sol";
+import "forge-std/Vm.sol";
+
 import "contracts/multiDelegateCall/UseMultiDelegateCall.sol";
 import "contracts/multiDelegateCall/Helper.sol";
 
-interface Vm {
-    function warp(uint256 x) external;
+// interface Vm {
+//     function warp(uint256 x) external;
 
-    function expectEmit(
-        bool,
-        bool,
-        bool,
-        bool
-    ) external;
-}
+//     function expectEmit(
+//         bool,
+//         bool,
+//         bool,
+//         bool
+//     ) external;
+// }
 
 contract MultiDelegateCallTest is DSTest {
-    Vm vm = Vm(0x7109709ECfa91a80626fF3989D68f67F5b1DD12D);
+    // Vm vm = Vm(0x7109709ECfa91a80626fF3989D68f67F5b1DD12D);
+    Vm public constant vm = Vm(HEVM_ADDRESS);
 
     UseMultiDelegateCall multiDelegateCall;
     Helper helper;

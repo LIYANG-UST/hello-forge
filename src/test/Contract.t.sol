@@ -1,5 +1,5 @@
 // SPDX-License-Identifier: Unlicense
-pragma solidity 0.8.10;
+pragma solidity ^0.8.10;
 
 import "ds-test/test.sol";
 
@@ -7,6 +7,8 @@ import "../Contract.sol";
 
 interface Vm {
     function prank(address) external;
+
+    function assume(bool) external;
 }
 
 contract Foo {
@@ -36,6 +38,9 @@ contract ContractTest is DSTest {
     }
 
     function testAddOne(uint256 x) public {
+        // Assume that x should be < 2^256 - 1
+        // No overflow with vm.assume
+        vm.assume(x < type(uint256).max);
         assertEq(x + 1, myContract.addOne(x));
     }
 
