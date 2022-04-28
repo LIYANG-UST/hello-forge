@@ -12,7 +12,7 @@ interface Vm {
 }
 
 contract Foo {
-    function bar() external {
+    function bar() external view {
         require(msg.sender == address(1), "wrong caller");
     }
 }

@@ -1,6 +1,7 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.10;
 
+
 contract Helper {
     function getFunc1Data(uint256 x) external pure returns (bytes memory) {
         return abi.encodeWithSelector(this.func1.selector, x);

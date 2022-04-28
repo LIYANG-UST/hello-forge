@@ -1,14 +1,17 @@
 // SPDX-License-Identifier: MIT
-pragma solidity ^0.8.10;
+pragma solidity ^0.8.13;
 
 import "forge-std/Test.sol";
 
 import "../../src/contracts/timeLock/TimeLock.sol";
 import "../../src/contracts/timeLock/Helper.sol";
 
+
 contract TimeLockTest is Test {
-    TimeLock timeLock;
+    TimeLock public timeLock;
     Helper helper;
+
+    // error NotOwner();
 
     address public constant alice = address(0x12);
 
@@ -28,8 +31,16 @@ contract TimeLockTest is Test {
         bytes memory data = new bytes(0x10);
         uint256 timestamp = block.timestamp + 100;
 
-        bytes32 IdFromTimeLock = timeLock.getTxId(target, value, func, data, timestamp);
-        bytes32 ownId= keccak256(abi.encode(target, value, func, data, timestamp));
+        bytes32 IdFromTimeLock = timeLock.getTxId(
+            target,
+            value,
+            func,
+            data,
+            timestamp
+        );
+        bytes32 ownId = keccak256(
+            abi.encode(target, value, func, data, timestamp)
+        );
 
         assertEq(IdFromTimeLock, ownId);
     }
@@ -41,8 +52,16 @@ contract TimeLockTest is Test {
         bytes memory data = new bytes(0x10);
         uint256 timestamp = block.timestamp + 100;
 
+        bytes32 txId = timeLock.getTxId(target, value, func, data, timestamp);
+
         // called by alice and give alice 20 ether
         hoax(alice, 20 ether);
+        timeLock.queue(target, value, func, data, timestamp);
+
+        assertTrue(timeLock.queued(txId));
+
+        // called by this contract will fail
+        vm.expectRevert(timeLock.NotOwner.selector);
         timeLock.queue(target, value, func, data, timestamp);
     }
 }
