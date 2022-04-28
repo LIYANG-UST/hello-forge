@@ -3,7 +3,7 @@ pragma solidity ^0.8.10;
 
 import "ds-test/test.sol";
 
-import "../Contract.sol";
+import "../src/Contract.sol";
 
 interface Vm {
     function prank(address) external;

@@ -2,10 +2,7 @@
 
 pragma solidity ^0.8.10;
 
-import "ds-test/test.sol";
-
-import "forge-std/stdLib.sol";
-import "forge-std/Vm.sol";
+import "forge-std/Test.sol";
 
 import "contracts/multiDelegateCall/UseMultiDelegateCall.sol";
 import "contracts/multiDelegateCall/Helper.sol";
@@ -21,9 +18,9 @@ import "contracts/multiDelegateCall/Helper.sol";
 //     ) external;
 // }
 
-contract MultiDelegateCallTest is DSTest {
+contract MultiDelegateCallTest is Test {
     // Vm vm = Vm(0x7109709ECfa91a80626fF3989D68f67F5b1DD12D);
-    Vm public constant vm = Vm(HEVM_ADDRESS);
+    // Vm public constant vm = Vm(HEVM_ADDRESS);
 
     UseMultiDelegateCall multiDelegateCall;
     Helper helper;

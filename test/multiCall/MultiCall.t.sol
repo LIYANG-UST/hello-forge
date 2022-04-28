@@ -1,9 +1,7 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.10;
 
-import "ds-test/test.sol";
-import "forge-std/stdLib.sol";
-import "forge-std/Vm.sol";
+import "forge-std/Test.sol";
 
 import "contracts/multiCall/MultiCall.sol";
 import "contracts/multiCall/Helper.sol";

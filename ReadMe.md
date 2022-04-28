@@ -7,14 +7,15 @@ For learning solidity and forge.
 ## Progress
 
 - [x] multi delegatecall
-- [ ] multi call
+- [x] multi call
+- [x] time lock
 
 ## Cheatcodes
 
 With forge-std, you do not need to manually declare the interface of Vm.
 
 ```
-import "forge-std/Vm.sol"
+import "forge-std/Test.sol"
 ```
 
 Or you can just declare the interface
