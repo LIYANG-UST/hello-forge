@@ -3,8 +3,8 @@ pragma solidity ^0.8.13;
 
 import "forge-std/Test.sol";
 
-import "../../src/contracts/timeLock/TimeLock.sol";
-import "../../src/contracts/timeLock/Helper.sol";
+import "contracts/timeLock/TimeLock.sol";
+import "contracts/timeLock/Helper.sol";
 
 
 contract TimeLockTest is Test {
@@ -61,7 +61,9 @@ contract TimeLockTest is Test {
         assertTrue(timeLock.queued(txId));
 
         // called by this contract will fail
-        vm.expectRevert(timeLock.NotOwner.selector);
+        // NotOwner error selector manually calculated
+        bytes4 selector_notOwner = bytes4(keccak256(bytes("NotOwner()")));
+        vm.expectRevert(selector_notOwner);
         timeLock.queue(target, value, func, data, timestamp);
     }
 }

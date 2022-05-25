@@ -1,12 +1,13 @@
 [default]
-verbosity = 1
-# solc_version = '0.8.10'
+verbosity = 5
+solc_version = '0.8.13'
 auto_detect_solc = true
 # offline = true
 optimizer = true                                             
 optimizer_runs = 200  
 src = "src"
 test = "test"
+
 
 
 [ci]

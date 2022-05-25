@@ -1,5 +1,5 @@
 @openzeppelin/=lib/openzeppelin-contracts/
 ds-test/=lib/ds-test/src/
 solmate/=lib/solmate/src/
-contracts/=src/contracts/
+contracts/=src/
 forge-std/=lib/forge-std/src/
